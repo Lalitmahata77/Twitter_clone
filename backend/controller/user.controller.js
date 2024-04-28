@@ -1,3 +1,4 @@
+import Notification from "../models/notification.model.js"
 import User from "../models/user.models.js"
 
 export const getUserProfile = async(req,res) =>{
@@ -43,6 +44,15 @@ export const followUnfollowUser = async(req,res)=>{
         //following the user
         await User.findByIdAndUpdate(id, {$push: {followers : req.user._id}})
         await User.findByIdAndUpdate(req.user._id, {$push : {following : id}})
+        //notification 
+        const newNotification = new Notification({
+            type : "follow",
+            from : req.user._id,
+            to : isModify._id
+        })
+        await newNotification.save()
+
+
         res.status(200).json({message : "follow successfully"})
     }
 

@@ -4,9 +4,15 @@ import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
 import connectMongoDb from "./db/connectToDb.js"
 import cookieParser from "cookie-parser"
+import { v2 as cloudinary } from "cloudinary"
 const app = express()
 
 dotenv.config()
+cloudinary.config({
+    cloud_name : process.env.CLOUDINARY_CLOUD_NAME,
+    api_key : process.env.CLOUDINARY_API_KEY,
+    api_secret : process.env.CLOUDINARY_API_SECRET
+})
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })); // to parse form data(urlencoded)
 

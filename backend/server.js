@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
 import postRoute from "./routes/post.route.js"
+import notificationRoute from "./routes/notification.route.js"
 import connectMongoDb from "./db/connectToDb.js"
 import cookieParser from "cookie-parser"
 import { v2 as cloudinary } from "cloudinary"
@@ -22,6 +23,7 @@ const PORT = process.env.PORT || 5000
 app.use("/api/auth/", authRoute)
 app.use("/api/user/", userRoute)
 app.use("/api/posts/", postRoute)
+app.use("/api/notification/", notificationRoute)
 app.listen(PORT, ()=>{
     connectMongoDb()
     console.log(`server is listening on ${PORT}`);
